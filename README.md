@@ -76,33 +76,35 @@ Exit Code Number | Meaning
 
 1. Install the Atomic Developer Bundle (ADB), as
 [documented](https://github.com/projectatomic/adb-atomic-developer-bundle/blob/master/docs/installing.rst)
-in the ADB project.  Do not start the box yet.
+in the ADB project. Do not start the box yet.
 
-2. Git clone repo
+1. Git clone repo
 
         git clone https://github.com/projectatomic/vagrant-service-manager
 
-3. `cd vagrant-service-manager`
+1. `cd vagrant-service-manager`
 
-4. Run `bundle install`
+1. `gem install bundler -v 1.10.6`
 
-5. Start the box with `bundle exec vagrant up`
+1. Run `bundle install`
 
-6. Review the [Contribution Guidelines](CONTRIBUTING.md).
+1. Start the box with `bundle exec vagrant up`
 
-7. Develop the plugin and test by running `bundle exec vagrant service-manager`
+1. Review the [Contribution Guidelines](CONTRIBUTING.md).
 
-8. When you are ready to build the release, get a repo maintainer to:
+1. Develop the plugin and test by running `bundle exec vagrant service-manager`
+
+1. When you are ready to build the release, get a repo maintainer to:
 
   1. Put the gemfile in pkg/ with `rake build`
 
-  2. Increment the Version Number
+  1. Increment the Version Number
 
-  3. Release the plugin with `rake release`
+  1. Release the plugin with `rake release`
 
-  4. Tag the release commit with a vX.Y.Z tag
+  1. Tag the release commit with a vX.Y.Z tag
 
-  5. Create a Github release
+  1. Create a Github release
 
 ### How to build the Vagrant plugin using Bundler
 
