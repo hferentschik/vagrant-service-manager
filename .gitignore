@@ -1,5 +1,4 @@
 # Ruby, Bundler
-Gemfile.lock
 .bundle
 .ruby-version
 .ruby-gemset
