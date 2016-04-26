@@ -91,10 +91,21 @@ GEM
     logging (2.0.0)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
+    mechanize (2.7.4)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0)
+      mime-types (>= 1.17.2, < 3)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.6)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     micromachine (1.1.0)
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     multi_json (1.11.2)
+    net-http-digest_auth (1.4)
+    net-http-persistent (2.9.4)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -104,6 +115,7 @@ GEM
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     nori (2.6.0)
+    ntlm-http (0.1.1)
     rainbow (2.1.0)
     rake (11.1.0)
     rb-fsevent (0.9.7)
@@ -139,6 +151,7 @@ GEM
       log4r
       micromachine (~> 1.1.0)
     wdm (0.1.1)
+    webrobots (0.1.2)
     winrm (1.7.2)
       builder (>= 2.1.2)
       gssapi (~> 1.2)
@@ -160,6 +173,7 @@ DEPENDENCIES
   fog-libvirt (= 0.0.3)
   gem-compare
   json
+  mechanize
   rake
   vagrant!
   vagrant-libvirt

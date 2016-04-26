@@ -1,0 +1,31 @@
+language: ruby
+
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq bsdtar libvirt-dev libvirt-bin qemu-kvm qemu
+ - sudo apt-get install -q virtualbox --fix-missing
+ - sudo apt-get install linux-headers-generic
+ - sudo dpkg-reconfigure virtualbox-dkms
+ - VBoxManage -v
+
+rvm:
+ - 2.0
+
+env:
+ global:
+ - VAGRANT_SPEC_BOX="file://$TRAVIS_BUILD_DIR/tmp/cdk.box"
+ - secure: "XO8175zGTqCfKfofkQhn2RonCdBOkoPic0TophmUmhNW2UKmdodo+JyX4pgC+sIT+X4BM37OPQz3mNNi+94h4l14KcU5VaNk2dkpxM25eQE7i0Znwff9fhFI74QAMfywTEwsLU+Fn1JfzqTrfvspSSKfGkkF+qVGeOjoIZ3VgEo0GOkYQpX8CaL/IXC2+h4cdEPlF3fTAZShA9UODsmplJ2q7lwFbpqDxVq2m3IkAGmGdC0+6+LN4uUUfnipiBgDCHGUpBWAVheKaZd9iL7J5SzzYd/PAsmC+OwCyrArmN3nu1RIUSrzCjLEkcGE3aCOCXbX9V60o4NnhwQbh7WuOMcgM8iMx1rAumlHI7BEaZDz8b+irkDgi4YAMxG6JwfRSkxZ/XvNXFgDXAXPl4RFfux4jhiHQAy0WPjyBanY+h33go6t60AKmLmILo6OtAU+yuWhiavpuiNeheXBuJ3ZWvyeVD+JKXEQ741DwHjYTDiKVXvlk+F/+iTX2v9ndxOrn+jgcYyNnTXadjRS78YYKkz2bu39MNtlJNWIzWQawjBer7zZkh4kHICA+DyDrWO13eHFwoLEH+bRcVHMNdu58Hkpdrk0MDfk8kCOI1/L5r81t3YA/U/H/3iGuTfmGnSWKX0E6G8PwMORReU3W0qHdu+RXxAMxGxtb3xqivrrv+E="
+ - secure: "fbUYIxRO3PIderFD/VigPtF7DgckHlNFMZnAsP3v7rLGLlG9ljy0LKmvF16uW9xTAsRF2sgSNFItzXraZnFOKoRtZQ7j4rA7dBmJQzVMWZ5t6fxZC9OZAgM/9yj6GtU7PpshDJjCa7uErTpe4KaMe80lNIawH8bwnWltEyaBoV/fqGMrDeWaXPGrA+d79w6nEprBSBjrosX6xts0zfEJRqiD1jcQ5lIp9OWo8Tv034EG0YKxKW6t+caRtXNK3Zv5g9KQ13O3xYn8zKg86HuBdi0394D4RHWRHF3IjFu7Wto6ZwbqZpX5L+zbI30x1IZYueCA2WT9rAc+rz9d2V5eJF/b7YULNPJYkDoxGPIEWfWMjfZC+saD3aJS2L1CMPRaF0CiS6dMd98nfd2I6xVUZR1Xl2+KhHU8Q6a84ry714eAp/xKXlidyEUpUTIooCkjryJ6HoU5d7zAOHgpDuHfaOZaGYIeUsX+NCAd8O0UG0UzpU4DA4M+ymx1fEvKPRhfUAE1AiK29+TxXvNBh3dMEnzaWn7caf/fLug9JTTtCrc3GoeM9umRyaQH6GK/lZ+qarPWc9bh1hFnhyQZfc40hSmGdVkGBfAU2HgaIg6pIo0VJ8k5oNa1I7nOmLKhc/UEtGbpX5rZgABOPQrYqCctkvMZnxOhY8YA/SskVKibI30="
+
+ cache:
+  directories:
+  - $TRAVIS_BUILD_DIR/tmp
+
+# uncomment this line if your project needs to run something other than `rake`:
+script:
+ - export rvmsudo_secure_path=1
+ - rvmsudo ruby --version
+ - rvmsudo gem --version
+ - rvmsudo bundle --version
+ - rvmsudo bundle exec rake getbox acceptance
+ - grep '0 failures' spec.log

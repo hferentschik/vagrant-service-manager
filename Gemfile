@@ -9,6 +9,7 @@ group :development do
   gem 'rake'
   gem 'vagrant-vbguest'
   gem 'vagrant-libvirt'
+  gem 'mechanize'
   gem 'fog-libvirt', '0.0.3' # https://github.com/pradels/vagrant-libvirt/issues/568
 
   # added as the vagrant component wouldn't build without it
