@@ -1,6 +1,10 @@
 require 'aruba/cucumber'
 require 'komenda'
 
+###############################################################################
+# Aruba config and Cucumber hooks
+###############################################################################
+
 Aruba.configure do |config|
   config.exit_timeout = 300
   config.activate_announcer_on_command_failure = [:stdout, :stderr]
@@ -11,6 +15,10 @@ After do |_scenario|
   if File.exist?(File.join(aruba.config.working_directory, 'Vagrantfile'))
     Komenda.run('bundle exec vagrant destroy -f', cwd: aruba.config.working_directory, fail_on_fail: true)
   end
+end
+
+Before do |scenario|
+  @scenario_name = scenario.name
 end
 
 ###############################################################################
@@ -33,6 +41,16 @@ def output_is_script_readable(raw_stdout)
   console_out = stdout_without_plugin_context(raw_stdout)
   console_out.each_line do |line|
     expect(line).to match(/^[a-zA-Z_]+=.*$/)
+  end
+end
+
+###############################################################################
+# Some shared step definitions
+##############################################################################
+Given /provider is (.*)/ do |provider|
+  unless provider == 'virtualbox' || (ENV.has_key?('CUCUMBER_RUN_PROVIDER') && ENV['CUCUMBER_RUN_PROVIDER'].include?(provider))
+    #puts "Skipping scenario '#{@scenario_name}' for provider '#{provider}', since this provider is not explicitly enabled via environment variable 'CUCUMBER_RUN_PROVIDER'"
+    skip_this_scenario
   end
 end
 

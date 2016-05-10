@@ -3,8 +3,11 @@ Feature: Command output from box command
 
   @box
   Scenario Outline: Boot and execute box commands
-    Given a file named "Vagrantfile" with:
+    Given provider is <provider>
+    And a file named "Vagrantfile" with:
     """
+    require 'vagrant-libvirt'
+    
     Vagrant.configure('2') do |config|
       config.vm.box = '<box>'
       config.vm.box_url = '<baseurl>-<provider>.box'
@@ -36,3 +39,5 @@ Feature: Command output from box command
       | box   | provider   | baseurl              |
       | cdk   | virtualbox | file://../boxes/cdk  |
       | adb   | virtualbox | file://../boxes/adb  |
+      | cdk   | libvirt    | file://../boxes/cdk  |
+      | adb   | libvirt    | file://../boxes/adb  |

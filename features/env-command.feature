@@ -3,7 +3,8 @@ Feature: Command output from env command
 
   @env
   Scenario Outline: Boot and execute env commands
-    Given a file named "Vagrantfile" with:
+    Given provider is <provider>
+    And a file named "Vagrantfile" with:
     """
     Vagrant.configure('2') do |config|
       config.vm.box = '<box>'
@@ -42,3 +43,5 @@ Feature: Command output from env command
       | box   | provider   | baseurl              |
       | cdk   | virtualbox | file://../boxes/cdk  |
       | adb   | virtualbox | file://../boxes/adb  |
+      | cdk   | libvirt    | file://../boxes/cdk  |
+      | adb   | libvirt    | file://../boxes/adb  |

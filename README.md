@@ -138,7 +138,15 @@ The tests assume that the ADB and CDK box files are available under
 _build/boxes/adb-\<provider\>.box_ resp _build/boxes/cdk-\<provider\>.box_. You can
 either copy the box files manually or use the _get_adb_ resp. _get_cdk_ Rake tasks.
 
-After test execution the Cucumber test reports can be found under _build/features_report.html_
+Per default the VirtualBox provider is used. However, you can also run against Libvirt
+by setting the _CUCUMBER_RUN_PROVIDER_ environment variable:
+
+    $ export CUCUMBER_RUN_PROVIDER=libvirt
+
+After test execution the Cucumber test reports can be found under _build/features_report.html_.
+They can also be opened via
+
+    $ bundle exec rake features:open_report
 
 <a name="builds"></a>
 ## Builds
