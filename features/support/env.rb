@@ -93,6 +93,12 @@ Then(%r{^stdout from "([^"]*)" should match /(.*)/$}) do |cmd, regexp|
   aruba.command_monitor.find(Aruba.platform.detect_ruby(cmd)).send(:stdout) =~ /#{regexp}/
 end
 
+Then(%r{^stderr from evaluating and running "([^"]*)" should match /(.*)/$}) do |cmd, regexp|
+  cmd = sanitize_text(eval('"' + cmd + '"'))
+  regexp = sanitize_text(eval('"' + regexp + '"'))
+  aruba.command_monitor.find(Aruba.platform.detect_ruby(cmd)).send(:stderr) =~ /#{regexp}/
+end
+
 # track service process ID
 @service_current_process_id = -1
 

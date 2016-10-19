@@ -18,8 +18,20 @@ Feature: Command output from various OpenShift related commands in CDK
       config.vm.box_url = 'file://../../.boxes/<box>-<provider>.box'
       config.vm.network :private_network, ip: '<ip>'
       config.vm.synced_folder '.', '/vagrant', disabled: true
+
+      config.vm.provider "libvirt" do |v, _override|
+        v.memory = 3072
+      end
+
       config.servicemanager.services = 'docker, openshift'
     end
+    """
+
+    When I successfully run `bundle exec vagrant up --provider <provider>`
+    Then stdout from "bundle exec vagrant up --provider <provider>" should contain:
+    """
+    ==> default: Docker service configured successfully...
+    ==> default: OpenShift service configured successfully...
     """
 
     When I successfully run `bundle exec vagrant up --provider <provider>`
