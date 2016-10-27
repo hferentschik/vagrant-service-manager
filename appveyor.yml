@@ -1,0 +1,18 @@
+---
+version: "{build}"
+branches:
+  only:
+    - appveyor
+install:
+  - set PATH=C:\Ruby200\bin;%PATH%
+  - ruby --version
+  - gem --version
+  - gem install bundler -v 12.5.0
+  - bundler --version
+  - bundle install
+build_script:
+  - bundle exec rake clean install
+test_script:
+  - bundle exec rake rubocop test
+artifacts:
+  - path: pkg\*.gem
